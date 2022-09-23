@@ -34,7 +34,11 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "simple-import-sort", "prettier"],
   overrides: [],
   rules: {
-    "prettier/prettier": ["error", {}, { usePrettierrc: true }],
+    "prettier/prettier": [
+      "error",
+      { endOfLine: "auto" },
+      { usePrettierrc: true },
+    ],
     "react/react-in-jsx-scope": "off",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
