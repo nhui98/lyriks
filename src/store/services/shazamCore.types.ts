@@ -1,4 +1,4 @@
-export interface RootObject {
+export interface Song {
   artists: Artist[];
   highlightsurls: Record<string, unknown>;
   hub: Hub;
