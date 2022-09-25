@@ -2,14 +2,19 @@ import Error from "@components/Common/Error";
 import Loader from "@components/Common/Loader";
 import SongCard from "@components/Common/Songcard";
 import { genres } from "@constants/genres";
-import { useAppSelector } from "@store/store";
+import { selectGenreListId } from "@store/reducers/playerSlice";
+import { useAppDispatch, useAppSelector } from "@store/store";
 
-import { useGetTopChartsQuery } from "../store/services/shazamCore";
+import { useGetSongsByGenreQuery } from "../store/services/shazamCore";
 
 const Discover = () => {
-  const { isPlaying, activeSong } = useAppSelector((state) => state.player);
-  const { data, isFetching, isError } = useGetTopChartsQuery();
-  const genreTitle = "Pop";
+  const dispatch = useAppDispatch();
+  const { isPlaying, activeSong, genreListId } = useAppSelector(
+    (state) => state.player
+  );
+  const { data, isFetching, isError } = useGetSongsByGenreQuery(
+    genreListId || "POP"
+  );
 
   if (isFetching) return <Loader title="Loading songs..." />;
 
@@ -18,15 +23,13 @@ const Discover = () => {
   return (
     <div className="flex flex-col">
       <div className="mt-4 mb-10 flex w-full flex-col items-center justify-between sm:flex-row">
-        <h2 className="text-left text-3xl font-bold text-white">
-          Discover {genreTitle}
-        </h2>
+        <h2 className="text-left text-3xl font-bold text-white">Discover</h2>
         <select
-          onChange={() => {
-            console.log();
+          onChange={(e) => {
+            dispatch(selectGenreListId(e.target.value));
           }}
-          value=""
-          className="text-grey-300 mt-5 rounded-lg bg-black p-3 text-sm outline-none sm:mt-0"
+          value={genreListId || "pop"}
+          className="mt-5 rounded-lg bg-black p-3 text-sm text-gray-300 outline-none sm:mt-0"
         >
           {genres.map(({ title, value }) => (
             <option key={value} value={value}>
