@@ -8,7 +8,7 @@ const PlayPause = ({
   handlePlay,
   isPlaying,
 }: PlayPauseProps) =>
-  isPlaying && activeSong?.title === song.title ? (
+  isPlaying && song && activeSong?.title === song.title ? (
     <FaPauseCircle size={35} className="text-gray-300" onClick={handlePause} />
   ) : (
     <FaPlayCircle size={35} className="text-gray-300" onClick={handlePlay} />
@@ -19,7 +19,7 @@ export default PlayPause;
 interface PlayPauseProps {
   isPlaying: boolean;
   activeSong: Song | null;
-  song: Song;
-  handlePause: () => void;
-  handlePlay: () => void;
+  song: Song | null;
+  handlePause?: () => void;
+  handlePlay?: () => void;
 }

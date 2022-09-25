@@ -11,6 +11,50 @@ export interface Song {
   title: string;
   type: string;
   url: string;
+  attributes?: {
+    name: string;
+    albumName: string;
+    artwork?: {
+      url: string;
+    };
+  };
+}
+
+export interface SongDetails {
+  albumadamid: string;
+  alias: string;
+  artists: Artist[];
+  genres: Genre;
+  highlightsurls: Record<string, unknown>;
+  hub: Hub;
+  images: Images;
+  isrc: string;
+  key: string;
+  layout: string;
+  releasedate: string;
+  subtitle: string;
+  title: string;
+  trackadamid: string;
+  type: string;
+  url: string;
+  share: Share;
+  sections: Section[];
+}
+export interface Section {
+  type: string;
+  tabname: string;
+  text: string[];
+}
+
+export interface Share {
+  avatar: string;
+  href: string;
+  html: string;
+  image: string;
+  snapchat: string;
+  subject: string;
+  text: string;
+  twitter: string;
 }
 
 export interface Artist {
@@ -68,4 +112,8 @@ export interface Share {
   subject: string;
   text: string;
   twitter: string;
+}
+
+export interface Genre {
+  primary: string;
 }
